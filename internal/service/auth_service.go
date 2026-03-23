@@ -39,7 +39,7 @@ func (s *AuthService) Login(input dto.LoginRequest) (*dto.LoginResponse, *errors
 	return mapper.ToLoginResponse(user, s.devTokenPrefix), nil
 }
 
-func (s *AuthService) Me(token string) (*dto.UserResponse, *errors.AppError) {
+func (s *AuthService) Me(token string) (*dto.AuthUserResponse, *errors.AppError) {
 	t := strings.TrimSpace(token)
 	prefix := s.devTokenPrefix
 	if prefix == "" || !strings.HasPrefix(t, prefix) {

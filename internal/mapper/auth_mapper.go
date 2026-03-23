@@ -2,8 +2,8 @@ package mapper
 
 import "fooder-backend/internal/dto"
 
-func ToUserResponse(user *dto.UserRecord) *dto.UserResponse {
-	return &dto.UserResponse{
+func ToUserResponse(user *dto.UserRecord) *dto.AuthUserResponse {
+	return &dto.AuthUserResponse{
 		Username: user.Username,
 		Name:     user.Name,
 		Roles:    user.Roles,

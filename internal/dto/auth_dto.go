@@ -8,11 +8,11 @@ type LoginRequest struct {
 }
 
 type LoginResponse struct {
-	Token string       `json:"token"`
-	User  UserResponse `json:"user"`
+	Token string           `json:"token"`
+	User  AuthUserResponse `json:"user"`
 }
 
-type UserResponse struct {
+type AuthUserResponse struct {
 	Username string   `json:"username"`
 	Name     string   `json:"name"`
 	Roles    []string `json:"roles"`
@@ -25,4 +25,4 @@ type UserRecord struct {
 	Roles    []string
 }
 
-type PaginatedUsersResponse = dto.Pagination[UserResponse]
+type PaginatedUsersResponse = dto.Pagination[AuthUserResponse]
