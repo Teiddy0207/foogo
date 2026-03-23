@@ -1,5 +1,7 @@
 package dto
 
+import "fooder-backend/core/dto"
+
 type LoginRequest struct {
 	Username string `json:"username"`
 	Password string `json:"password"`
@@ -23,3 +25,4 @@ type UserRecord struct {
 	Roles    []string
 }
 
+type PaginatedUsersResponse = dto.Pagination[UserResponse]
