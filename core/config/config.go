@@ -22,9 +22,10 @@ type Config struct {
 }
 
 type AppConfig struct {
-	Name string
-	Port string
-	Env  string
+	Name           string
+	Port           string
+	Env            string
+	DetectGRPCAddr string
 }
 
 type AuthConfig struct {
@@ -93,9 +94,10 @@ func Init() error {
 
 		cfg := &Config{
 			App: AppConfig{
-				Name: strings.TrimSpace(v.GetString("APP_NAME")),
-				Port: strings.TrimSpace(v.GetString("APP_PORT")),
-				Env:  strings.TrimSpace(v.GetString("APP_ENV")),
+				Name:           strings.TrimSpace(v.GetString("APP_NAME")),
+				Port:           strings.TrimSpace(v.GetString("APP_PORT")),
+				Env:            strings.TrimSpace(v.GetString("APP_ENV")),
+				DetectGRPCAddr: strings.TrimSpace(v.GetString("APP_DETECT_GRPC_ADDR")),
 			},
 			Log: LogConfig{
 				Level:         strings.TrimSpace(v.GetString("APP_LOG_LEVEL")),
@@ -146,6 +148,9 @@ func Init() error {
 
 		if cfg.App.Port == "" {
 			cfg.App.Port = "3000"
+		}
+		if cfg.App.DetectGRPCAddr == "" {
+			cfg.App.DetectGRPCAddr = "localhost:50051"
 		}
 		if cfg.Log.Level == "" {
 			cfg.Log.Level = "INFO"

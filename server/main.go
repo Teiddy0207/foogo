@@ -39,8 +39,17 @@ func main() {
 	authRepo := repository.NewInMemoryAuthRepository()
 	authService := service.NewAuthService(authRepo, cfg.Auth.DevTokenPrefix)
 	authController := controller.NewAuthController(authService)
+
+	detectService, err := service.NewDetectService(cfg.App.DetectGRPCAddr)
+	if err != nil {
+		panic(err)
+	}
+	defer func() { _ = detectService.Close() }()
+	detectController := controller.NewDetectController(detectService)
+
 	router.RegisterRoutes(e, router.Controllers{
-		Auth: authController,
+		Auth:   authController,
+		Detect: detectController,
 	})
 
 	addr := ":" + cfg.App.Port

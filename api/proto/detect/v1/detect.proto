@@ -1,0 +1,24 @@
+syntax = "proto3";
+
+package detect.v1;
+
+option go_package = "fooder-backend/gen/go/detect/v1;detectv1";
+
+service FoodDetectService {
+  rpc AnalyzeFood(AnalyzeFoodRequest) returns (AnalyzeFoodResponse);
+}
+
+message AnalyzeFoodRequest {
+  string object_key = 1;
+}
+
+message FoodItem {
+  string name = 1;
+  float confidence = 2;
+  float calories_est = 3;
+}
+
+message AnalyzeFoodResponse {
+  repeated FoodItem items = 1;
+  string note = 2;
+}
